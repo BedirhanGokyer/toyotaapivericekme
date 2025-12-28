@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Documennt</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="kapsayıcı">
+      <div class="header">
+        <h1>Toyata Araç Verileri</h1>
+        <p>API Ninjas - Cars Yardımıyla araç bilgilerini çekme</p>
+        <button id="darkmode">Karanlık Mod</button>
+      </div>
+      <div class="arama">
+        <p>ARAMA/FİLTRE</p>
+      </div>
+      <div class="fıltre">
+        <input id="aramainputu" type="text" placeholder="Arama" />
+        <input id="listelemebutonu" type="button" value="Ara/Listele" />
+        <select name="" id="filtresecme">
+          <option value="">Filtre Seç</option>
+          <option value="gaz">Benzinli</option>
+          <option value="dizel">Dizel</option>
+          <option value="elektrikli">Elektrikli</option>
+          <option value="gazlı">Gazlı</option>
+        </select>
+      </div>
+      <div class="yuklenıyorekranı">
+        <p id="bilgiendirmeekranı"></p>
+      </div>
+      <div class="araclar">
+        <h2>KART LİSTESİ</h2>
+        <div class="arackartları"></div>
+      </div>
+      <div class="detaypaneli">
+        <h3 id="modeladı">Kart Başlığı</h3>
+        <div class="detaylar">
+          <p id="detay1"></p>
+          <p id="detay2"></p>
+          <p id="detay3"></p>
+          <p id="detay4"></p>
+          <p id="detay5"></p>
+          <p id="detay6"></p>
+        </div>
+        <button onclick="detaykapatma()">Detayı Kapat</button>
+      </div>
+      <div>
+        <div class="hakkımızda">
+          <h2>Hakkımızda</h2>
+          <p>
+            Araç Verilerini ninjas cars api web sitesi üzerinden çekilerek
+            yapılan bir projedir. Burada amaç api verisinin doğru bir şekilde
+            çekilmesi ve gelen aracın detaylarının incelenebilmesidir.
+          </p>
+        </div>
+        <div class="iletisim">
+          <h2>İletişim</h2>
+          <p>E-posta: example@email.com || GitHub/</p>
+          <br />
+          <p>© 2025 - Tüm hakları saklıdır</p>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
