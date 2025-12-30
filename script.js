@@ -1,5 +1,4 @@
 const API_KEY = "k0/H5fUGA+xZKtZ/1yi0Ag==S9QbwsLqyUZqLjv2";
-const URL = "https://api.api-ninjas.com/v1/cars?model=corolla";
 
 const input = document.getElementById("aramainputu");
 const button = document.getElementById("listelemebutonu");
@@ -21,33 +20,39 @@ button.addEventListener("click", arabaGetir);
 
 async function arabaGetir() {
   kartAlanı.innerHTML = "";
-  bilgi.textContent = " Veriler yükleniyor  ...";
+  bilgi.textContent = "Veriler yükleniyor...";
 
-  if (input.value.trim() === "" || /^\d+$/.test(input.value)) {
-    bilgi.textContent = " Lütfen marka veya model giriniz";
+  const arama = input.value.trim().toLowerCase();
+
+  if (arama === "" || /^\d+$/.test(arama)) {
+    bilgi.textContent = "Lütfen marka veya model giriniz";
     return;
   }
 
+  const URL = `https://api.api-ninjas.com/v1/cars?model=${arama}`;
+
   try {
     const cevap = await fetch(URL, {
-      headers: { "X-Api-Key": API_KEY },
+      headers: {
+        "X-Api-Key": API_KEY,
+      },
     });
 
     let data = await cevap.json();
 
     if (filtre.value !== "") {
-      data = data.filter((a) => a.fuel_type === filtre.value);
+      data = data.filter((arac) => arac.fuel_type === filtre.value);
     }
 
     if (data.length === 0) {
-      bilgi.textContent = " Sonuç bulunamadı";
+      bilgi.textContent = "Sonuç bulunamadı";
       return;
     }
 
-    bilgi.textContent = " araclar listelendi";
+    bilgi.textContent = "Araçlar listelendi";
     kartBas(data);
-  } catch (e) {
-    bilgi.textContent = " Veri alınamadı";
+  } catch (hata) {
+    bilgi.textContent = "Veri alınamadı";
   }
 }
 
@@ -57,17 +62,19 @@ function kartBas(arabalar) {
     div.className = "card";
 
     div.innerHTML = `
-    <h3>${arac.make} ${arac.model}</h3>
-    <p>Yıl: ${arac.year || "-"}</p>
-    <p>Yakıt: ${arac.fuel_type || "-"}</p>
-    <button>Detay</button>
+      <h3>${arac.make} ${arac.model}</h3>
+      <p>Yıl: ${arac.year || "-"}</p>
+      <p>Yakıt: ${arac.fuel_type || "-"}</p>
+      <button>Detay</button>
     `;
 
-    div.querySelector("button").onclick = () => detayAc(arac);
+    div.querySelector("button").addEventListener("click", () => {
+      detayAc(arac);
+    });
+
     kartAlanı.appendChild(div);
   });
 }
-
 function detayAc(arac) {
   baslik.textContent = `${arac.make} ${arac.model}`;
 
@@ -84,14 +91,17 @@ function detayAc(arac) {
 function detaykapatma() {
   panel.style.display = "none";
 }
+
 const modeBtn = document.getElementById("darkmode");
 
-modeBtn.addEventListener("click", () => {
-  document.body.classList.toggle("dark");
+if (modeBtn) {
+  modeBtn.addEventListener("click", () => {
+    document.body.classList.toggle("dark");
 
-  if (document.body.classList.contains("dark")) {
-    modeBtn.textContent = " Light Mode";
-  } else {
-    modeBtn.textContent = " Dark Mode";
-  }
-});
+    if (document.body.classList.contains("dark")) {
+      modeBtn.textContent = "Light Mode";
+    } else {
+      modeBtn.textContent = "Dark Mode";
+    }
+  });
+}
